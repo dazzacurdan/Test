@@ -1,14 +1,8 @@
 import java.util.*;
-/*Test Input:
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-
-Expected Output:
-1 3 N
-5 1 E*/
+/*TODO
+ * 1) Improve INPUT parsing
+ * 2) Add handling of map size
+ * */
 public class MarsMission {
 	public static void main( String[] args){
 		Vector<Rover> rovers = new Vector<Rover>();

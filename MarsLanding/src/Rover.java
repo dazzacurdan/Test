@@ -1,9 +1,16 @@
+/*TODO
+ * 1) Improve Doxygen Documentation
+ * 2) Remove private static int mapW=5,mapH=5; and handle this values outside
+ * 3) Add tests in particular for:
+ * 		run()
+ *      stress map limits, sequnce of command,  
+ * */
 public class Rover {
 	private int x,y;//Actual position of the rover
 	Directions orientation;//Actual orientation of the rover
-	
-	private int mapW=5,mapH=5;//Map Size
+	private static int mapW=5,mapH=5;//Map Size
 	private String missionCommands;
+	
 	/*Default constructor: set the rover in the origin of the landing area*/
 	Rover(){
 		this.x = 0;
@@ -57,28 +64,38 @@ public class Rover {
 		boolean state=false;
 		switch(orientation){
 		case NORTH:
-			if(y<mapW){
+			if(y < mapH){
 				y++;
 				state=true;
 			}
 			break;
 		case EAST:
-			x++;state=true;
+			if(x < mapW){
+				x++;
+				state=true;
+			}
 			break;
 		case SOUTH:
-			y--;state=true;
+			if(y >= 0){
+				y--;
+				state=true;
+			}
 			break;
 		case WEST:
-			x--;state=true;
+			if(x >= 0){
+				x--;
+				state=true;
+			}
 			break;
 		default:
 			System.out.println("Invalid Movement: "+orientation.getDirectionCode());
+			System.out.println(".:Mission Aborted:. ");
 			break;
 		}
 		return state;
 	}
 	public void endMission(){
-		System.out.println("Mission complete:");
+		System.out.println(".:Mission complete:.");
 		System.out.println(x+" "+y+" "+orientation.getDirectionCode());
 	}
 }

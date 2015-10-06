@@ -1,4 +1,9 @@
-
+/*TODO
+ * 1) Improve Doxygen Documentation
+ * 2) Add tests in particular for:
+ * 		getNext()
+ * 		getPrevious() 
+ * */
 public enum Directions {
 	NORTH ('N'),
 	 EAST ('E'),
@@ -19,7 +24,6 @@ public enum Directions {
       for (Directions type : Directions.values())
           if (type.shortCode == code)
               return type;
-
       return null;
   }
   public Directions getNext() {
@@ -28,4 +32,5 @@ public enum Directions {
   public Directions getPrevious() {	  
 	  return values()[( (ordinal()-1 < 0 ? values().length-1 : ordinal()-1 )) % values().length];
   }
+
 }
