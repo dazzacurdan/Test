@@ -41,10 +41,13 @@ public class Rover {
 					}
 				break;
 				case 'L':
+					orientation=orientation.getPrevious();
 				break;
 				case 'R':
+					orientation=orientation.getNext();
 				break;
 				default:
+					state = false;
 				break;
 			}
 		}

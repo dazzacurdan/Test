@@ -1,13 +1,11 @@
 
 public enum Directions {
 	NORTH ('N'),
-	EAST ('E'),
+	 EAST ('E'),
 	SOUTH ('S'), 
-	WEST ('W')
+	 WEST ('W')
   ; 
-  /* Important Note: Must have semicolon at
-   * the end when there is a enum field or method
-   */
+  
   private final char shortCode;
 	  
   Directions(char code) {
@@ -23,5 +21,11 @@ public enum Directions {
               return type;
 
       return null;
+  }
+  public Directions getNext() {
+	  return values()[(ordinal()+1) % values().length];
+  }
+  public Directions getPrevious() {	  
+	  return values()[( (ordinal()-1 < 0 ? values().length-1 : ordinal()-1 )) % values().length];
   }
 }

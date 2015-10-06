@@ -19,8 +19,9 @@ public class MarsMission {
 		
 		Iterator<Rover> it = rovers.iterator();
 		while( it.hasNext() ){
-			if(it.next().run())
-				it.next().endMission();
+			Rover obj=it.next();
+			if(obj.run())
+				obj.endMission();
 		}
 	}
 }
