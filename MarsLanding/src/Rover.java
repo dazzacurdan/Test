@@ -1,38 +1,36 @@
 /*TODO
  * 1) Improve Doxygen Documentation
- * 2) Remove private static int mapW=5,mapH=5; and handle this values outside
  * 3) Add tests in particular for:
  * 		run()
  *      stress map limits, sequnce of command,  
  * */
 public class Rover {
+	private int id;
+	private final int defaultMapW=5,defaultMapH=5;//Default Map Size
 	private int x,y;//Actual position of the rover
+	private int mapW,mapH;//Default Map Size
 	Directions orientation;//Actual orientation of the rover
-	private static int mapW=5,mapH=5;//Map Size
+	
 	private String missionCommands;
 	
 	/*Default constructor: set the rover in the origin of the landing area*/
 	Rover(){
+		this.id = 0;
 		this.x = 0;
 		this.y = 0;
 		this.orientation = Directions.NORTH;
+		this.mapW=this.defaultMapW;
+		this.mapH=this.defaultMapH;
 	}
-	Rover(int x,int y,Directions orientation){
+	Rover(int id, int x,int y,Directions orientation, int mapW, int mapH ){
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.orientation = orientation;
+		this.mapW=mapW;
+		this.mapH=mapH;
 	}
-	Rover(String initialState){
-		String[] tokens = initialState.split(" ");
-		if (tokens.length == 3){
-			this.x = Integer.parseInt(tokens[0]);
-			this.y = Integer.parseInt(tokens[1]);
-			this.orientation = Directions.getDirectionForCode( tokens[2].charAt(0) );
-		}else{
-			//this();
-		}
-		
-	}
+	
 	public void setMission(String missionCommands){ 
 		this.missionCommands = missionCommands;
 	}
@@ -95,7 +93,10 @@ public class Rover {
 		return state;
 	}
 	public void endMission(){
-		System.out.println(".:Mission complete:.");
-		System.out.println(x+" "+y+" "+orientation.getDirectionCode());
+		System.out.println(".:Rover "+id+" complete the exploration:.");
+		System.out.println("\t\t"+x+" "+y+" "+orientation.getDirectionCode());
+	}
+	public int getID(){
+		return id;
 	}
 }

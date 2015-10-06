@@ -20,12 +20,28 @@ public class MarsMission {
 				String[] mapSize = mission_it.next().split(" ");
 				Vector<Rover> rovers = new Vector<Rover>();
 				
+				int roverID=0;
 				while( mission_it.hasNext() ){
 					String[] initialPose = mission_it.next().split(" ");
-					rovers.add(new Rover( Integer.parseInt(initialPose[0]),
-										  Integer.parseInt(initialPose[1]),
-										  Directions.getDirectionForCode(initialPose[2].charAt(0)) ));
-					rovers.lastElement().setMission(mission_it.next());
+					if (initialPose.length == 3){
+						rovers.add(new Rover( roverID,
+											  Integer.parseInt(initialPose[0]),
+											  Integer.parseInt(initialPose[1]),
+											  Directions.getDirectionForCode(initialPose[2].charAt(0)),
+											  Integer.parseInt(mapSize[0]),
+											  Integer.parseInt(mapSize[1])
+											  ));
+						
+						rovers.lastElement().setMission(mission_it.next());
+						
+					}else{
+						System.out.println(".:Rover "+roverID+" aborted the exploration:.");
+						System.out.println("\t\tInvalid initial Pose, commands skipped");
+						
+						if( mission_it.hasNext() )
+							mission_it.next();
+					}
+					roverID++;
 				}
 								
 				Iterator<Rover> it = rovers.iterator();
